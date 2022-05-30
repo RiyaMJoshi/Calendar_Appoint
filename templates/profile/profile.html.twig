@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1 class="mb-4">Hello User!</h1>
+
+    <span class="text-capitalize text-primary">Check your profile here</span>
+    <ul class="fs-6">
+        <li>Name: Riya Joshi</li>
+        <li>Email: riyajoshi312@gmail.com</li>
+        <li>Workplace: Simform Solutions</li>
+        <li>Work Email: riya.j@simformsolution.com</li>
+        <li>Location: Ahmedabad, Gujarat, India</li>
+    </ul>
+
+    <span class="text-capitalize">Get your appointments booked with us now at any time from anywhere! </span>
+    <br/>
+    <!-- Calendly link widget begin -->
+    <div>
+        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+        <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+        <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/riyajoshi-sal/customer-meeting?hide_gdpr_banner=1&primary_color=9d6328'});return false;" class="link-widget-home">Finalize Meeting with Us</a>
+    </div>  
+    <!-- Calendly link widget end -->
+</div>
+{% endblock %}

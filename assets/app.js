@@ -10,3 +10,9 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
+
+// activates collapse functionality
+import { Collapse } from 'bootstrap';
+
+// Need jQuery?
+import $ from 'jquery';

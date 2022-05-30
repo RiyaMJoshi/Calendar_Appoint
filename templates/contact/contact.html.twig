@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactController!{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1 class="mb-4">Hello User!</h1>
+
+    Thank you for reaching out to us..!
+    <span class="text-capitalize">Get your appointments booked with us now at any time from anywhere! </span>
+
+    <!-- Calendly inline widget begin -->
+    <div class="calendly-inline-widget contact-cal" data-url="https://calendly.com/riyajoshi-sal/customer-meeting?hide_gdpr_banner=1&background_color=1a1a1a&text_color=ffffff&primary_color=c34c6b">
+    </div>
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <!-- Calendly inline widget end -->
+</div>
+{% endblock %}

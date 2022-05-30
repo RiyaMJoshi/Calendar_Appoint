@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendar Appoint!{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1 class="mb-4">Hello User!</h1>
+
+    <span class="text-capitalize">Get your appointments booked with us now at any time from anywhere! </span>
+    <br/>
+
+    <!-- Calendly link widget begin -->
+    <div>
+        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+        <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+        <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/riyajoshi-sal/customer-meeting?hide_gdpr_banner=1&primary_color=9d6328'});return false;" class="link-widget-home">Finalize Meeting with Us</a>
+    </div>  
+    <!-- Calendly link widget end -->
+
+    <!-- Calendly badge widget begin -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/riyajoshi-sal/customer-meeting?hide_gdpr_banner=1&primary_color=cc9a06', text: 'Confirm Meeting', color: '#cc9a06', textColor: '#1a1a1a', branding: false }); }</script>
+    <!-- Calendly badge widget end -->
+</div>
+{% endblock %}
