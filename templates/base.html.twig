@@ -7,9 +7,37 @@
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan&display=swap">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
             {{ encore_entry_link_tags('app') }}
+            <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+            {# <style>
+                .calendly-overlay .calendly-popup {
+                    box-sizing: border-box;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translateY(-50%) translateX(-50%);
+                    width: 80%;
+                    min-width: 900px;
+                    max-width: 1000px;
+                    height: 90%;
+                    max-height: 680px;
+                    background: antiquewhite;
+                    /* padding: 0; */
+                }
+
+                ._cUP1np9gMvFQrcPftuf._Y8HCTxgNkwxXcG_DCXx {
+                    padding-right: 5%;
+                    padding-left: 5%;
+                }
+
+                ._cUP1np9gMvFQrcPftuf.xahN8AEzyAvQtVj17TPv {
+                    margin-top: 18px;
+                    margin-bottom: 22px;
+                }
+            </style> #}
         {% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
         {% endblock %}
     </head>
     <body class="d-flex flex-column min-vh-100">
@@ -26,17 +54,17 @@
 
                 <div class="collapse navbar-collapse" id="navbar-collapsable">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        {% if is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+                        {# {% if is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %} #}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('app_profile') }}">Profile</a>
                             </li>
-                        {% endif %}
+                        {# {% endif %} #}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_contact') }}">Contact Us</a>
                         </li>
                     </ul>
-                    <a class="nav-link text-black-50" href="{{ path('app_homepage') }}">Log In</a>
-                    <a href="{{ path('app_profile') }}" class="btn btn-dark">Sign up</a>
+                    {# <a class="nav-link text-black-50" href="{{ path('app_homepage') }}">Log In</a>
+                    <a href="{{ path('app_profile') }}" class="btn btn-dark">Sign up</a> #}
                     
                 </div>
             </div>
