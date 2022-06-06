@@ -12,12 +12,104 @@
 
     <!-- Calendly link widget begin -->
     <div>
-        <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/riyajoshi-sal/customer-meeting?hide_gdpr_banner=1&primary_color=9d6328'});return false;" class="link-widget-home">Finalize Meeting with Us</a>
+        <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/riyajoshi-sal/customer-meeting?hide_gdpr_banner=1&primary_color=9d6328'});return false;" 
+            class="link-widget-home">   
+            Finalize Meeting with Us
+        </a>
     </div>  
     <!-- Calendly link widget end -->
 
+    <div class="d-flex justify-content-between mt-4">
+        <!-- Calendly link widget begin (One-Off Meeting) -->
+        <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/d/dmj-4gj-5yf/one-off-meeting?hide_gdpr_banner=1&primary_color=9d6328'});return false;" 
+            class="btn btn-danger">   
+            Today's Meeting
+        </a>
+        <!-- Calendly link widget end (One-Off Meeting) -->
+        
+        <!-- Calendly link widget begin (Polling Meeting for 5th-6th June)-->
+        <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/d/dnd-34x-4z6/meeting-poll?hide_gdpr_banner=1&primary_color=9d6328'});return false;" 
+            class="btn btn-primary">   
+            Polling MeetUp
+        </a>
+        <!-- Calendly link widget end (Polling Meeting for 5th-6th June) -->
+    </div>  
+  
+    <div class="mt-4">
+        <div class="card">
+            <div class="card-body pt-4 bg-free-workshop">
+                <h4 class="card-title text-light card-free-title">Try Workshop for Free</h4>
+                <h5 class="card-subtitle mb-2 text-muted text-capitalize">Join our free trial</h5>
+                <div class="d-flex">
+                    <p class="card-text free-workshop-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate, voluptates. Deleniti, quia 
+                        voluptatibus amet doloribus minus ipsam omnis est voluptatum consequuntur, similique sint ab quo asperiores! 
+                        Quibusdam autem sed delectus ducimus dolorum, soluta accusamus! Itaque voluptas aliquam iusto tempore magnam 
+                        distinctio explicabo excepturi dolore beatae ipsa! At corporis quaerat perferendis tempore a ratione 
+                        quibusdam modi quam unde laudantium quos magnam natus mollitia quod non minima iusto iste quasi excepturi eos 
+                        possimus, aliquam provident! Deleniti, animi aut maiores provident ad facere.
+                    </p>
+                    <img class="img-workshop mx-3 mb-3" src="{{asset('images/se_workshop.png') }}" class="card-img-top" alt="workshop.png">
+                </div>
+                <div class="workshop-div mt-3">
+                    <!-- Calendly link widget begin -->
+                    <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/riyajoshi-sal/free-workshop-trial?hide_gdpr_banner=1&background_color=ffffff&text_color=333333&primary_color=000000'});return false;" 
+                        class="btn btn-workshop">
+                            Attend Workshop 🎉
+                    </a>
+                    <!-- Calendly link widget end -->
+                </div>
+                {# <div class="container">
+                    <!-- Calendly badge widget begin -->
+                    <script type="text/javascript">
+                        window.onload = function() { 
+                            Calendly.initBadgeWidget({ 
+                                    url: 'https://calendly.com/riyajoshi-sal/daily-conference?hide_gdpr_banner=1&background_color=1a1a1a&text_color=ffffff&primary_color=343f4e', 
+                                    text: 'Attend Conference', 
+                                    color: '#343f4e', 
+                                    textColor: '#ffffff', 
+                                    branding: false 
+                            });
+
+                            $(".bg-free-workshop .container").addClass("limited-conference-btn");
+                        }
+                    </script>
+                    <!-- Calendly badge widget end -->
+                </div> #}
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <div class="card">
+            <div class="card-body pt-4 bg-dark">
+                <h4 class="card-title text-light card-free-title">Get Knowledge from Our Best</h4>
+                <h5 class="card-subtitle mb-2 text-muted text-capitalize">Improve your Understanding</h5>
+                <div class="d-flex">
+                    <p class="card-text free-workshop-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate, voluptates. Deleniti, quia 
+                        voluptatibus amet doloribus minus ipsam omnis est voluptatum consequuntur, similique sint ab quo asperiores! 
+                        Quibusdam autem sed delectus ducimus dolorum, soluta accusamus! Itaque voluptas aliquam iusto tempore magnam 
+                        distinctio explicabo excepturi dolore beatae ipsa! At corporis quaerat perferendis tempore a ratione 
+                        quibusdam modi quam unde laudantium quos magnam natus mollitia quod non minima iusto iste quasi excepturi eos 
+                        possimus, aliquam provident! Deleniti, animi aut maiores provident ad facere.
+                    </p>
+                    <img class="img-workshop mx-3 mb-3" src="{{asset('images/workshop.png') }}" class="card-img-top" alt="workshop.png">
+                </div>
+                <div class="workshop-div mt-3">
+                    <!-- Calendly link widget begin -->
+                    <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/d/dnf-sk7-gq5/expert-session?hide_gdpr_banner=1&background_color=343a40&text_color=ffffff&primary_color=edd6da'});return false;"
+                        class="btn btn-workshop">
+                            Get Expertise
+                            <i class="far fa-lightbulb text-warning"></i>
+                    </a>
+                    <!-- Calendly link widget end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# This 'Confirm Meeting' Badge Button Will be overhidden by 'Schedule a Meeting' Badge Button created below it #}
     <!-- Calendly badge widget begin -->
-    <script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/riyajoshi-sal/customer-meeting?hide_gdpr_banner=1&primary_color=cc9a06', text: 'Confirm Meeting', color: '#cc9a06', textColor: '#1a1a1a', branding: false }); }</script>
+    {# <script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/riyajoshi-sal/customer-meeting?hide_gdpr_banner=1&primary_color=cc9a06', text: 'Confirm Meeting', color: '#cc9a06', textColor: '#1a1a1a', branding: false }); }</script> #}
     <!-- Calendly badge widget end -->
 
 

@@ -10,9 +10,43 @@
     Thank you for reaching out to us..!
     <span class="text-capitalize">Get your appointments booked with us now at any time from anywhere! </span>
 
+    <div class="text-dark">
+        Want to work with us and grow yourselves? <a href="#job-meeting" class="text-dark"> Schedule a Special Meeting </a>
+    </div>
+
     <!-- Calendly inline widget begin -->
     <div class="calendly-inline-widget contact-inline-cal mt-2" data-url="https://calendly.com/riyajoshi-sal/customer-meeting?hide_gdpr_banner=1&background_color=1a1a1a&text_color=ffffff&primary_color=c34c6b">
     </div>
     <!-- Calendly inline widget end -->
+
+    <div id="job-meeting">
+        <div class="mt-4">
+            <div class="card">
+                <div class="card-body pt-4 bg-dark">
+                    <h4 class="card-title text-light card-free-title">Get Yourself The Best</h4>
+                    <h5 class="card-subtitle mb-2 text-muted text-capitalize">Grow with us</h5>
+                    <div class="d-flex">
+                        <p class="card-text free-workshop-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate, voluptates. Deleniti, quia 
+                            voluptatibus amet doloribus minus ipsam omnis est voluptatum consequuntur, similique sint ab quo asperiores! 
+                            Quibusdam autem sed delectus ducimus dolorum, soluta accusamus! Itaque voluptas aliquam iusto tempore magnam 
+                            distinctio explicabo excepturi dolore beatae ipsa! At corporis quaerat perferendis tempore a ratione 
+                            quibusdam modi quam unde laudantium quos magnam natus mollitia quod non minima iusto iste quasi excepturi eos 
+                            possimus, aliquam provident! Deleniti, animi aut maiores provident ad facere.
+                        </p>
+                        {# <img class="img-workshop mx-3 mb-3" src="{{asset('images/workshop.png') }}" class="card-img-top" alt="workshop.png"> #}
+                    </div>
+                    <div class="workshop-div mt-3">
+                        <!-- Calendly link widget begin -->
+                        <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/d/dsm-6hr-3k5/apply-for-job?hide_gdpr_banner=1&background_color=1a1a1a&text_color=cccccc&primary_color=56ade6'});return false;"
+                            class="btn btn-workshop">
+                                Apply for Job 
+                                <i class="fa fa-briefcase text-warning" aria-hidden="true"></i>
+                        </a>
+                        <!-- Calendly link widget end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

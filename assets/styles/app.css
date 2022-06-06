@@ -21,10 +21,15 @@ body {
     height:1050px;
 }
 
+/* For Schedule a Meeting Badge Button */
 .calendly-badge-widget { 
     margin-bottom: 20px;
     margin-right: 20px;
 } 
+
+#card-free-title:hover {
+    text-decoration: underline;
+}
 
 /* .calendly-overlay .calendly-popup {
     box-sizing: border-box;
@@ -89,6 +94,74 @@ body {
 ._cUP1np9gMvFQrcPftuf.xahN8AEzyAvQtVj17TPv {
     margin-top: 20px;
     margin-bottom: 15px;
+} */
+
+.bg-free-workshop {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.free-workshop-desc {
+    color: gray;
+}
+
+.limited-conference-btn {
+    position: relative;
+    top: 30%;
+    border-radius: 10px;
+    background-color: red;
+    color: white;
+    /* height: 60px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(52, 63, 78);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px; */
+}
+
+/* For Conference */
+.workshop-div {
+    position: relative;
+    /* left: 5px; */
+    top: 5%;
+    z-index: 9998;
+}
+.img-workshop {
+    width: 50%;
+    height: 90%;
+}
+.btn-workshop {
+    display: table-cell;
+    width: auto;
+    height: 45px;
+    padding: 0 30px;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 2px 5px;
+    font-family: sans-serif;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 14px;
+    color: #fff;
+    background-color: #343f4e;
+}
+
+.btn-workshop:hover {
+    background-color: #505a68;
+}
+
+/* For Attend Conference */
+/* .calendly-badge-widget .calendly-badge-content {
+    display: table-cell;
+    width: auto;
+    height: 45px;
+    padding: 0 30px;
+    border-radius: 7px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 2px 5px;
+    font-family: sans-serif;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
 } */
 
 footer {
