@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfileController!{% endblock %}
+{% block title %}My Profile{% endblock %}
 
 {% block body %}
 <style>
@@ -18,6 +18,15 @@
         <li>Workplace: Simform Solutions</li>
         <li>Work Email: riya.j@simformsolution.com</li>
         <li>Location: Ahmedabad, Gujarat, India</li>
+    </ul>
+
+    <span class="text-capitalize text-primary">Your booking details</span>
+    <ul class="fs-6 text-dark">
+        <li>Registered Name: {{ name }} </li>
+        <li>Email ID: {{ app.request.get('invitee_email') }}</li>
+        <li>You've Meeting with: {{ host }} </li>
+        <li>Event Type: {{ event }}</li>
+        <li>Scheduled From: {{ app.request.get('event_start_time') }} <span class="text-secondary"> To </span> {{ app.request.get('event_end_time') }}</li>
     </ul>
 
     <span class="text-capitalize">Get your appointments booked with us now at any time from anywhere! </span>
