@@ -23,4 +23,19 @@ class ProfileController extends AbstractController
             'event' => $eventType
         ]);
     }
+
+    #[Route('/my-schedule', name: 'app_my_schedule')]
+    public function mySchedule(Request $request): Response
+    {
+        $name = $request->get('invitee_full_name');
+        $assignedTo = $request->get('assigned_to');
+        $eventType = $request->get('event_type_name');
+
+        return $this->render('profile/profile.html.twig', [
+            'controller_name' => 'ProfileController',
+            'name' => $name,
+            'host' => $assignedTo,
+            'event' => $eventType
+        ]);
+    }
 }
