@@ -16,7 +16,7 @@
                 <li>Name: {{ user.name }}</li>
                 <li>Email: {{ user.email }}</li>
                 <li>Your Scheduling URL: <a href="{{ user.scheduling_url }}" >{{ user.scheduling_url }}</a></li>
-                <li>Work Email: </li>
+                <li>Your Account was Created: {{ user.created_at | ago }}</li>
                 <li>Location: Ahmedabad, Gujarat, India</li>
             </ul>
             <div class="col-md-4">
