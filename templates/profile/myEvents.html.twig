@@ -10,9 +10,9 @@
     <div class="example-wrapper col-md-8">
         {# <h1 class="mb-4">Hello {{ events.name }}!</h1> #}
 
-        <span class="text-capitalize text-primary">Check your events here</span>
-        {% for event in events %}
-            <div class="card mt-4">
+        <span class="text-capitalize text-primary">Total Available Events: <span class="badge rounded-pill bg-primary">{{ event_counts }}</span></span>
+        {% for event in pager %}
+            <div class="card my-4">
                 <span class="h5 m-2 text-dark">Event Name: {{ event.name }}</span>
                 <ul class="fs-6">
                     <li>Status: 
@@ -34,7 +34,8 @@
                     </li>
                 </ul>
             </div>
-        {% endfor %}        
+        {% endfor %}  
+        {{ pagerfanta(pager) }}      
     </div>
 </div>
 
