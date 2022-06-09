@@ -25,3 +25,9 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    # app.calendly_api_client:
+    #         class:     App\Http\CalendlyApiClient
+    #         arguments: ['@client']
+
+    CalendlyApiClient:
+        class: App\Http\CalendlyApiClient

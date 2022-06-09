@@ -8,35 +8,37 @@
         {% include "profile/sidebar.html.twig" %}
     </div>
     <div class="example-wrapper col-md-8">
-        <h1 class="mb-4">Hello User!</h1>
+        <h1 class="mb-4">Hello {{ user.name }}!</h1>
 
         <span class="text-capitalize text-primary">Check your profile here</span>
-        <ul class="fs-6">
-            <li>Name: Riya Joshi</li>
-            <li>Email: riyajoshi312@gmail.com</li>
-            <li>Workplace: Simform Solutions</li>
-            <li>Work Email: riya.j@simformsolution.com</li>
-            <li>Location: Ahmedabad, Gujarat, India</li>
-        </ul>
+        <div class="d-flex">
+            <ul class="fs-6 col-md-8">
+                <li>Name: {{ user.name }}</li>
+                <li>Email: {{ user.email }}</li>
+                <li>Your Scheduling URL: <a href="{{ user.scheduling_url }}" >{{ user.scheduling_url }}</a></li>
+                <li>Work Email: </li>
+                <li>Location: Ahmedabad, Gujarat, India</li>
+            </ul>
+            <div class="col-md-4">
+                <img class="img-thumbnail float-end avatar" src="{{ user.avatar_url }}">
+            </div>
+        </div>
 
         <span class="text-capitalize text-primary">Your booking details</span>
-        <ul class="fs-6 text-dark">
-            <li>Registered Name: {{ name }} </li>
-            <li>Email ID: {{ app.request.get('invitee_email') }}</li>
-            <li>You've Meeting with: {{ host }} </li>
-            <li>Event Type: {{ event }}</li>
-            <li>Scheduled From: {{ app.request.get('event_start_time') }} <span class="text-secondary"> To </span> {{ app.request.get('event_end_time') }}</li>
-        </ul>
+        {# <ul class="fs-6 text-dark">
+            <li>Registered Name: {{ user.name }} </li>
+            <li>Email ID: </li>
+            <li>You've Meeting with:  </li>
+            <li>Event Type: </li>
+            <li>Scheduled From:  <span class="text-secondary"> To </span> </li>
+        </ul> #}
 
-        <span class="text-capitalize">Get your appointments booked with us now at any time from anywhere! </span>
-        <br/>
+        <p class="text-capitalize">Get your appointments booked with us now at any time from anywhere! </p>
         <!-- Calendly link widget begin -->
         <div>
             <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/riyajoshi-sal/customer-meeting?hide_gdpr_banner=1&primary_color=9d6328'});return false;" class="link-widget-home">Finalize Meeting with Us</a>
         </div>  
         <!-- Calendly link widget end -->
-
-        <button type="button" class="btn btn-primary" name="myBtn">Button </button>
     </div>
 </div>
 
