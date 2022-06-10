@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Events{% endblock %}
+
+{% block body %}
+<div class="d-flex">
+    <div class="mt-4 bg-dark col-md-2">
+        {% include "profile/sidebar.html.twig" %}
+    </div>
+    <div class="example-wrapper col-md-8">
+        {# <h1 class="mb-4">Hello {{ events.name }}!</h1> #}
+        <div class="d-flex justify-content-between">
+            <span class="fs-4 text-capitalize text-primary">
+                {{ event.name }}
+            </span>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{{ path('app_my_events') }}" class="btn btn-primary btn-outline-light" id="btn_events_all">All</a>
+                <a href="{{ path('app_my_selected_events', {'status': 1}) }}" class="btn btn-primary btn-outline-light" id="btn_events_active">Active</a>
+                <a href="{{ path('app_my_selected_events', {'status': 0}) }}" class="btn btn-primary btn-outline-light" id="btn_events_inactive">Inactive</a>
+            </div>
+        </div>
+        <div id="event">
+		        <div class="card my-4" id="event_records">
+                    {# <span class="h5 m-2 text-dark">{{ event.name }}</span> #}
+                    <ul class="m-2 fs-6">
+                        <li>Status:
+                            {% if event.active == 1 %}
+                                Active
+                            {% else %}
+                                Not Active
+                            {% endif %}
+                        </li>
+                        <li>Event Description: <br/>
+                            <div class="mx-4 fs-6">
+                                {% if event.description_plain != null %}
+                                    {{ event.description_plain }}
+                                {% else %}
+                                    No Description Available
+                                {% endif %}
+                            </div>
+                        </li>
+                        <li> Event Belongs To:
+                            {% if event.profile != null %}
+                                <ul> 
+                                    <li> Name: {{ event.profile.type }} - {{ event.profile.name }} </li>
+                                    <li> URI: <a class="text-secondary" href="{{ event.profile.owner }}">{{ event.profile.owner }}</a> </li>
+                                    {# {% for profile in event.profile %}
+                                        <li>
+                                            {{ profile }} 
+                                        </li>
+                                    {% endfor %} #}
+                                </ul>
+                            {% else %}
+                                Not Assigned Yet
+                            {% endif %}
+                        </li>
+                        <li>Event Created At: {{ event.created_at|date("d/m/Y") }} ({{ event.created_at|ago }}) </li>
+                        <li>Event Deleted At: 
+                            {% if event.deleted_at != null %}
+                                {{ event.deleted_at|date("d/m/Y") }} ({{ event.deleted_at|ago }})
+                            {% else %}
+                                Not Deleted Yet
+                            {% endif %}
+                        </li>
+                        <li>Event Duration: {{ event.duration }} Minutes </li>
+                        <li>Event Booking URL:
+                            <a class="text-secondary" href="{{ event.scheduling_url }}">{{ event.scheduling_url }}</a>
+                        </li>
+                        <li>Event URI:
+                            <a class="text-secondary" href="{{ event.uri }}">{{ event.uri }}</a>
+                        </li>
+                        <li>Event Pooling Type:
+                            {% if event.pooling_type == 'round_robin' %}
+                                Round Robin
+                            {% elseif event.pooling_type == 'collective' %}
+                                Collective
+                            {% else %}
+                                NA
+                            {% endif %}
+                        </li>
+                        <li> Custom Questions: 
+                            <ul>
+                                {% for question in event.custom_questions %}
+                                    <li>
+                                        {{ question.name }} ({% if question.required == "true" %}Required 
+                                                            {% else %}Optional {% endif %}-
+                                        {{ question.type }})
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+    </div>
+</div>
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            console.log($("#sidebarProfile").children(".nav-item").children(".nav-link").addClass("text-secondary"));
+        });
+    </script>
+
+    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+{% endblock %}
+{% endblock %}
