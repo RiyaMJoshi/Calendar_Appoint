@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}My Event{% endblock %}
+{% block title %}My Scheduled Event{% endblock %}
 
 {% block body %}
 <div class="d-flex">
@@ -14,48 +14,60 @@
                 {{ event.name }}
             </span>
             <div class="btn-group" role="group" aria-label="Basic example">
-                <a href="{{ path('app_my_events') }}" class="btn btn-primary btn-outline-light" id="btn_events_all">All</a>
-                <a href="{{ path('app_my_selected_events', {'status': 1}) }}" class="btn btn-primary btn-outline-light" id="btn_events_active">Active</a>
-                <a href="{{ path('app_my_selected_events', {'status': 0}) }}" class="btn btn-primary btn-outline-light" id="btn_events_inactive">Inactive</a>
+                <a href="{{ path('app_scheduled_events') }}" class="btn btn-primary btn-outline-light" id="btn_events_all">All</a>
+                <a href="{{ path('app_selected_scheduled_events', {'status': 1}) }}" class="btn btn-primary btn-outline-light" id="btn_events_active">Active</a>
+                <a href="{{ path('app_selected_scheduled_events', {'status': 0}) }}" class="btn btn-primary btn-outline-light" id="btn_events_inactive">Cancelled</a>
             </div>
         </div>
         <div id="event">
 		        <div class="card my-4" id="event_records">
                     {# <span class="h5 m-2 text-dark">{{ event.name }}</span> #}
+                    {# From index 42 onwards, event uuid will get started #}
+		            {% set uuid = event.uri|slice(slicer) %}
                     <ul class="m-2 fs-6">
                         <li>Status:
-                            {% if event.active == 1 %}
+                            {% if event.status == "active" %}
                                 <span class="text-success">Active</span>
+                            {% elseif event.status == "canceled" %}
+                                <span class="text-danger">Cancelled</span>
                             {% else %}
-                                <span class="text-danger">Not Active</span>
-                            {% endif %}
-                        </li>
-                        <li>Event Description: <br/>
-                            <div class="mx-4 fs-6">
-                                {% if event.description_plain != null %}
-                                    {{ event.description_plain }}
-                                {% else %}
-                                    No Description Available
-                                {% endif %}
-                            </div>
-                        </li>
-                        <li> Event Belongs To:
-                            {% if event.profile != null %}
-                                <ul> 
-                                    <li> Name: {{ event.profile.type }} - {{ event.profile.name }} </li>
-                                    <li> URI: <a class="text-secondary" href="{{ event.profile.owner }}">{{ event.profile.owner }}</a> </li>
-                                    {# {% for profile in event.profile %}
-                                        <li>
-                                            {{ profile }} 
-                                        </li>
-                                    {% endfor %} #}
-                                </ul>
-                            {% else %}
-                                Not Assigned Yet
+                                {{ event.status }}
                             {% endif %}
                         </li>
                         <li>Event Created At: {{ event.created_at|date("d/m/Y") }} ({{ event.created_at|ago }}) </li>
-                        <li>Event Deleted At: 
+                        <li> Event Guests: ({{ event.event_guests|length }})
+                            {% if event.event_guests != null %}
+                                <ul>
+                                    {% for guest in event.event_guests %}
+                                        <li>
+                                            {{ guest.email }} 
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                No any Guests
+                            {% endif %}
+                        </li>
+                        <li> Event Belongs To: ({{ event.event_memberships|length }})
+                            {% if event.event_memberships != null %}
+                                <ul>
+                                    {% for member in event.event_memberships %}
+                                        <li> User: <a class="text-secondary" href="{{ member.user }}">{{ member.user }}</a> </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                Not assigned yet
+                            {% endif %}
+                        </li>
+                        <li> Invitees Counts: <a class="text-primary" href="{{ path('app_show_scheduled_event_invitees', {'uuid': uuid}) }}">Show Event Invitees</a> 
+                                <ul>
+                                    <li> Active: {{ event.invitees_counter.active }} </li>
+                                    <li> Limit: {{ event.invitees_counter.limit }} </li>
+                                    <li> Total: {{ event.invitees_counter.total }} </li>
+                                </ul>
+                        </li>
+                        
+                        {# <li>Event Deleted At: 
                             {% if event.deleted_at != null %}
                                 {{ event.deleted_at|date("d/m/Y") }} ({{ event.deleted_at|ago }})
                             {% else %}
@@ -88,7 +100,7 @@
                                     </li>
                                 {% endfor %}
                             </ul>
-                        </li>
+                        </li> #}
                     </ul>
                 </div>
         </div>

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Scheduled Events{% endblock %}
+
+{% block body %}
+<div class="d-flex">
+    <div class="mt-4 bg-dark col-md-2">
+        {% include "profile/sidebar.html.twig" %}
+    </div>
+    <div class="example-wrapper col-md-8">
+        {# <h1 class="mb-4">Hello {{ events.name }}!</h1> #}
+        <div class="d-flex justify-content-between">
+            <span class="text-capitalize text-primary">
+                Total Scheduled Events: <span class="badge rounded-pill bg-primary">{{ event_counts }}</span>
+            </span>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{{ path('app_scheduled_events') }}" class="btn btn-primary btn-outline-light" id="btn_events_all">All</a>
+                <a href="{{ path('app_selected_scheduled_events', {'status': 1}) }}" class="btn btn-primary btn-outline-light" id="btn_events_active">Active</a>
+                <a href="{{ path('app_selected_scheduled_events', {'status': 0}) }}" class="btn btn-primary btn-outline-light" id="btn_events_inactive">Cancelled</a>
+            </div>
+        </div>
+        {% include "events/scheduled_events/scheduledEvents.html.twig" %}
+    </div>
+</div>
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            console.log($("#sidebarProfile").children(".nav-item").children(".nav-link").addClass("text-secondary"));
+        });
+    </script>
+
+    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+{% endblock %}
+{% endblock %}

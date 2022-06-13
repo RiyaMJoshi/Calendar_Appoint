@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Event Invitees{% endblock %}
+
+{% block body %}
+<div class="d-flex">
+    <div class="mt-4 bg-dark col-md-2">
+        {% include "profile/sidebar.html.twig" %}
+    </div>
+    <div class="example-wrapper col-md-8">
+        {# <h1 class="mb-4">Hello {{ events.name }}!</h1> #}
+        <div class="d-flex justify-content-between">
+            <span class="fs-4 text-capitalize text-primary">
+                {{ event_name }} ({{ invitees | length}} Invitees)
+            </span>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{{ path('app_show_scheduled_event', {'uuid': uuid}) }}" class="btn btn-success btn-outline-light" id="btn_events_all"><i class="fas fa-arrow-alt-circle-left"></i></a>
+            </div>
+        </div>
+        <div id="event">
+            {% for invitee in invitees %}
+		        <div class="card my-4" id="event_records">
+                    <div class="d-flex mx-3 mt-2 justify-content-between">
+                        {% set uid = invitee.uri | slice(88) %}
+                        <a href="{{ path('app_show_scheduled_event_invitees_by_uid', {'uuid': uuid, 'uid': uid}) }}" class="h5 text-dark">
+                            {% if (invitee.first_name != null) and (invitee.last_name != null)  %}
+                                {{ invitee.first_name }}  {{ invitee.last_name}}
+                            {% else %}
+                                {{ invitee.name }}
+                            {% endif %}
+                        </a>
+                        <button type="button" class="btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#qnaModal">
+                            See QnA
+                        </button>
+                        {# <a href="#modal_que_ans" class="btn-sm btn-warning">See QnA</a> #}
+                    </div>
+                    {# From index 42 onwards, event uuid will get started #}
+		            {# {% set uuid = event.uri|slice(slicer) %} #}
+                    <ul class="m-2 fs-6">
+                        <li>Invitee Email:
+                            <a class="text-secondary" href="mailto: {{ invitee.email }}">{{ invitee.email }}</a>
+                        </li>
+                        <li>Event Created At: {{ invitee.created_at|date("d/m/Y") }} ({{ invitee.created_at|ago }}) </li>
+                        <li>Rescheduled?:
+                            {% if invitee.rescheduled %}
+                                <span class="text-success">Yes</span>
+                            {% else %}
+                                No
+                            {% endif %}
+                        </li>
+                        <li>Invitee Timezone: {{ invitee.timezone }}</li>
+                        <li>Cancellation URL:
+                            <a class="text-secondary" href="{{ invitee.cancel_url }}">{{ invitee.cancel_url }}</a>
+                        </li>
+                        <li>Rescheduling URL:
+                            <a class="text-secondary" href="{{ invitee.reschedule_url }}">{{ invitee.reschedule_url }}</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- The Modal -->
+                <div class="modal" id="qnaModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">QnA</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                {% if invitee.questions_and_answers == null %}
+                                    <div class="mb-3">
+                                        <label for="no-qna" class="form-label">No any Questions are there to show!</label>
+                                    </div>
+                                {% else %}
+                                    {% for qna in invitee.questions_and_answers %}
+                                        <div class="mb-3">
+                                            <label for="qna" class="form-label">{{ qna.question }}</label>
+                                            <input type="text" class="form-control" id="qna" value="{{ qna.answer }}" readonly>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

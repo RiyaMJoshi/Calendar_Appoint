@@ -1,0 +1,24 @@
+<div id="records_main">
+	{% for event in pager %}
+		<div class="card my-4" id="event_records">
+		{# From index 42 onwards, event uuid will get started #}
+		{% set uuid = event.uri|slice(slicer) %}
+			<a class="h5 m-2 text-dark" href="{{ path('app_show_scheduled_event', {'uuid': uuid}) }}">{{ event.name }}</a>
+			<ul class="fs-6">
+				<li>Status:
+					{% if event.status == "active" %}
+                        <span class="text-success">Active</span>
+                    {% elseif event.status == "canceled" %}
+                        <span class="text-danger">Cancelled</span>
+                    {% else %}
+                        {{ event.status }}
+                    {% endif %}
+				</li>
+				<li>Your Event URL:
+					<a class="text-secondary" href="{{ event.uri }}">{{ event.uri }}</a>
+				</li>
+			</ul>
+		</div>
+	{% endfor %}
+	{{ pagerfanta(pager) }}
+</div>

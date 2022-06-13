@@ -2,15 +2,15 @@
 	{% for event in pager %}
 		<div class="card my-4" id="event_records">
 		{# From index 37 onwards, event uuid will get started #}
-		{% set uuid = event.uri|slice(37) %}
+		{% set uuid = event.uri|slice(slicer) %}
 			<a class="h5 m-2 text-dark" href="{{ path('app_show_event', {'uuid': uuid}) }}">{{ event.name }}</a>
 			<ul class="fs-6">
 				<li>Status:
 					{% if event.active == 1 %}
-						Active
-					{% else %}
-						Not Active
-					{% endif %}
+                        <span class="text-success">Active</span>
+                    {% else %}
+                        <span class="text-danger">Not Active</span>
+                    {% endif %}
 				</li>
 				<li>Your Event URL:
 					<a class="text-secondary" href="{{ event.scheduling_url }}">{{ event.scheduling_url }}</a>
