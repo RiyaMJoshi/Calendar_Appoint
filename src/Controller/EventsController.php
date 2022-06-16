@@ -108,7 +108,6 @@ class EventsController extends AbstractController
     #[Route('/scheduled-events/{uuid}', name: 'app_show_scheduled_event')]
     public function showScheduledEvent($uuid, Request $request, CalendlyApiClient $calendly): Response
     {
-        // $user = $calendly->getCurrentUserProfile();
         $event = $calendly->getParticularScheduledEvent($uuid);
         // dd($event);
         $event_type_id = substr($event['event_type'], 37);
@@ -128,7 +127,6 @@ class EventsController extends AbstractController
     #[Route('/scheduled-events/{uuid}/cancellation', name: 'app_cancel_scheduled_event')]
     public function cancelScheduledEvent($uuid, Request $request, CalendlyApiClient $calendly): Response
     {
-        // $user = $calendly->getCurrentUserProfile();
         // dd($uuid);
         $reason = $request->get("reason");
         // dd($reason);
@@ -144,7 +142,6 @@ class EventsController extends AbstractController
     #[Route('/scheduled-events/{uuid}/invitees', name: 'app_show_scheduled_event_invitees')]
     public function showScheduledEventInvitees($uuid, Request $request, CalendlyApiClient $calendly): Response
     {
-        // $user = $calendly->getCurrentUserProfile();
         // dd($uuid);
         $invitees = $calendly->getParticularScheduledEventInvitees($uuid);
         // dd($invitees);
@@ -163,7 +160,6 @@ class EventsController extends AbstractController
     #[Route('/scheduled-events/{uuid}/invitees/{uid}', name: 'app_show_scheduled_event_invitees_by_uid')]
     public function showScheduledEventInviteesByUId($uuid, $uid, Request $request, CalendlyApiClient $calendly): Response
     {
-        // $user = $calendly->getCurrentUserProfile();
         // dd($uuid);
         $invitees = $calendly->getParticularScheduledEventInviteesByUId($uuid, $uid);
         // dd($invitees);
@@ -183,7 +179,6 @@ class EventsController extends AbstractController
     #[Route('/invitee-no-shows/{uuid}/invitees/{uid}', name: 'app_create_invitee_no_show')]
     public function createInviteeNoShow($uuid, $uid, Request $request, CalendlyApiClient $calendly): Response
     {
-        // $user = $calendly->getCurrentUserProfile();
         $no_show = $calendly->createNoShow($uuid, $uid);
         // dd($no_show);
         $event_name = $calendly->getParticularScheduledEventName($uuid);
@@ -195,7 +190,6 @@ class EventsController extends AbstractController
     #[Route('/invitee-no-shows/{no_show_uuid}', name: 'app_delete_invitee_no_show')]
     public function deleteInviteeNoShow($no_show_uuid, Request $request, CalendlyApiClient $calendly): Response
     {
-        // $user = $calendly->getCurrentUserProfile();
         $no_show = $this->showInviteeNoShow($no_show_uuid, $calendly);
         $uuid = substr($no_show['invitee'], 42, 36);
         $uid = substr($no_show['invitee'], 88);
@@ -211,7 +205,6 @@ class EventsController extends AbstractController
     #[Route('/invitee-no-shows/{uuid}', name: 'app_get_invitee_no_show')]
     public function showInviteeNoShow($uuid, CalendlyApiClient $calendly): array
     {
-        // $user = $calendly->getCurrentUserProfile();
         // dd($uuid);
         $no_show = $calendly->getInviteeNoShow($uuid);
         // dd($no_show);
