@@ -5,7 +5,7 @@
 		{% set uuid = event.uri|slice(slicer) %}
 			<div class="d-flex justify-content-between m-2">
 				<a class="h5 text-dark" href="{{ path('app_show_event', {'uuid': uuid}) }}">{{ event.name }}</a>
-				<a href="{{ path('app_scheduling_links') }}" class="btn-sm btn-success btn-outline-light text-decoration-none" id="btn_generate_scheduling_link">Generate Scheduling Link</a>
+				{# <a href="{{ path('app_scheduling_links') }}" class="btn-sm btn-success btn-outline-light text-decoration-none" id="btn_generate_scheduling_link">Generate Scheduling Link</a> #}
 			</div>
 			<ul class="fs-6">
 				<li>Status:
