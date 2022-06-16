@@ -3,7 +3,10 @@
 		<div class="card my-4" id="event_records">
 		{# From index 37 onwards, event uuid will get started #}
 		{% set uuid = event.uri|slice(slicer) %}
-			<a class="h5 m-2 text-dark" href="{{ path('app_show_event', {'uuid': uuid}) }}">{{ event.name }}</a>
+			<div class="d-flex justify-content-between m-2">
+				<a class="h5 text-dark" href="{{ path('app_show_event', {'uuid': uuid}) }}">{{ event.name }}</a>
+				<a href="{{ path('app_scheduling_links') }}" class="btn-sm btn-success btn-outline-light text-decoration-none" id="btn_generate_scheduling_link">Generate Scheduling Link</a>
+			</div>
 			<ul class="fs-6">
 				<li>Status:
 					{% if event.active == 1 %}

@@ -1,3 +1,97 @@
-Customise this page 
-for displaying more detailed information 
-about the Invitee and his actions on this particular event.
+{% extends 'base.html.twig' %}
+
+{% block title %}My Event Info{% endblock %}
+
+{% block body %}
+<div class="d-flex">
+    <div class="mt-4 bg-dark col-md-2">
+        {% include "profile/sidebar.html.twig" %}
+    </div>
+    <div class="example-wrapper col-md-8">
+        <div class="d-flex justify-content-between">
+            <span class="fs-4 text-capitalize text-primary">{{ event_name }} - (
+                {% if (invitee.first_name != null) and (invitee.last_name != null)  %}
+                    {{ invitee.first_name }}  {{ invitee.last_name}}
+                {% else %}
+                    {{ invitee.name }}
+                {% endif %}
+                )
+            </span>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{{ path('app_show_scheduled_event_invitees', {'uuid': uuid}) }}" class="btn btn-success btn-outline-light" id="btn_events_back"><i class="fas fa-arrow-alt-circle-left"></i></a>
+                {% if invitee.no_show != null %}
+                    {% set no_show_uuid = invitee.no_show.uri | slice(42) %}
+                    <a href="{{ path('app_delete_invitee_no_show', {'no_show_uuid': no_show_uuid}) }}" class="btn btn-danger btn-outline-light" id="btn_create_no_show">Unmark as No Show</i></a>
+                {% else %}
+                    <a href="{{ path('app_create_invitee_no_show', {'uuid': uuid, 'uid': uid}) }}" class="btn btn-danger btn-outline-light" id="btn_create_no_show">Mark as No Show</i></a>
+                {% endif %}
+            </div>
+        </div>
+        <div id="event">
+		        <div class="card my-4" id="event_records">
+                    <ul class="m-2 fs-6">
+                        <li>Status:
+                            {% if invitee.status == "active" %}
+                                <span class="text-success">Active</span>
+                            {% elseif invitee.status == "canceled" %}
+                                <span class="text-danger">Cancelled</span>
+                            {% else %}
+                                {{ invitee.status }}
+                            {% endif %}
+                        </li>
+                        <li>Event Created At: {{ invitee.created_at|date("d/m/Y") }} ({{ invitee.created_at|ago }}) </li>
+                        <li>Booked By: {{ invitee.email }} </li>
+                        {% if invitee.cancellation is defined %}
+                            <li> Event Cancelled By:
+                                {{ invitee.cancellation.canceled_by }}  
+                                <span class="text-capitalize"> ({{ invitee.cancellation.canceler_type }}) </span>
+                            </li>
+                            <li> Cancellation Reason:
+                                {{ invitee.cancellation.reason }}
+                            </li>
+                        {% endif %}    
+                        <li>Event Cancellation URL:
+                            <a class="text-secondary" href="{{ invitee.cancel_url }}">{{ invitee.cancel_url }}</a>
+                        </li>
+                        <li>Rescheduled?:
+                            {% if invitee.rescheduled %}
+                                <span class="text-success">Yes</span>
+                            {% else %}
+                                No
+                            {% endif %}
+                        </li>
+                        <li>Event Rescheduling URL:
+                            <a class="text-secondary" href="{{ invitee.reschedule_url }}">{{ invitee.reschedule_url }}</a>
+                        </li>
+                        <li>Is this a No Show?:
+                        {% if invitee.no_show != null %} Yes
+                            <ul>
+                                <li> Invitee No Show URL:
+                                    <a class="text-secondary" href="{{ invitee.no_show.uri }}">{{ invitee.no_show.uri }}</a>     
+                                </li>
+                                <li> No Show Created At:
+                                    {{ invitee.no_show.created_at|date("d/m/Y") }} ({{ invitee.no_show.created_at|ago }}) 
+                                </li>
+                            </ul>
+                        {% else %}
+                            No
+                        {% endif %} 
+                        </li>                    
+                    </ul>
+                </div>
+        </div>
+    </div>
+</div>
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            console.log($("#sidebarProfile").children(".nav-item").children(".nav-link").addClass("text-secondary"));
+        });
+    </script>
+
+    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+{% endblock %}
+{% endblock %}

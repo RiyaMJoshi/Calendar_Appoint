@@ -8,7 +8,6 @@
         {% include "profile/sidebar.html.twig" %}
     </div>
     <div class="example-wrapper col-md-8">
-        {# <h1 class="mb-4">Hello {{ events.name }}!</h1> #}
         <div class="d-flex justify-content-between">
             <span class="fs-4 text-capitalize text-primary">
                 {{ event.name }}
@@ -21,18 +20,48 @@
         </div>
         <div id="event">
 		        <div class="card my-4" id="event_records">
-                    {# <span class="h5 m-2 text-dark">{{ event.name }}</span> #}
                     {# From index 42 onwards, event uuid will get started #}
 		            {% set uuid = event.uri|slice(slicer) %}
                     <ul class="m-2 fs-6">
                         <li>Status:
                             {% if event.status == "active" %}
-                                <span class="text-success">Active</span>
+                                    <span class="text-success">Active</span> 
+                                    {% if ( event.start_time|date('U') > date()|date('U')) %}
+                                        <button type="button" class="btn-sm btn-danger ms-4 mb-2" data-bs-toggle="modal" data-bs-target="#cancelModal">
+                                            Cancel Event
+                                        </button>
+                                    {% else %}
+                                        
+                                    {% endif %}
+                                    
+                                    {# <a href="{{ path('app_cancel_scheduled_event', {'uuid': uuid}) }}" class="btn-sm btn-danger ms-4" id="btn_events_cancel">Cancel Event</a> #}
                             {% elseif event.status == "canceled" %}
                                 <span class="text-danger">Cancelled</span>
                             {% else %}
                                 {{ event.status }}
                             {% endif %}
+                        </li>
+                        <li>Event Scheduled For: {{ duration }} mins
+                        {# <li> Event Scheduled For: {{ event.end_time|time_diff(event.start_time) }} #}
+                            <ul>
+                                <li>From: {{ event.start_time|date("d M Y")}} - {{ event.start_time|date("h:i A")}} ({{ event.start_time|ago}}) </li>
+                                <li>To: {{ event.end_time|date("d M Y")}} - {{ event.end_time|date("h:i A")}} </li>
+                            </ul>
+                        </li>
+                        {% set meeting_type = event.location.type %}
+                        <li>Event Scheduled As: {{ meeting_type|capitalize|replace({'_': ' '}) }}
+                            <ul>
+                                <li> 
+                                    {% if meeting_type == "physical" %} 
+                                        Location: <span class="text-secondary"> {{ event.location.location }} </span>
+                                    {% elseif meeting_type == "custom" %}
+                                        Location: <span class="text-secondary"> Not Decided Yet </span>
+                                    {% elseif meeting_type == "microsoft_teams_conference" %}
+                                        Joining Link: <a class="text-secondary" href="{{ event.location.join_url }}">{{ event.location.join_url }}</a> 
+                                    {% endif %}
+                                    
+                                </li>
+                            </ul>
                         </li>
                         <li>Event Created At: {{ event.created_at|date("d/m/Y") }} ({{ event.created_at|ago }}) </li>
                         <li> Event Guests: ({{ event.event_guests|length }})
@@ -66,56 +95,41 @@
                                     <li> Total: {{ event.invitees_counter.total }} </li>
                                 </ul>
                         </li>
-                        
-                        {# <li>Event Deleted At: 
-                            {% if event.deleted_at != null %}
-                                {{ event.deleted_at|date("d/m/Y") }} ({{ event.deleted_at|ago }})
-                            {% else %}
-                                Not Deleted Yet
-                            {% endif %}
-                        </li>
-                        <li>Event Duration: {{ event.duration }} Minutes </li>
-                        <li>Event Booking URL:
-                            <a class="text-secondary" href="{{ event.scheduling_url }}">{{ event.scheduling_url }}</a>
-                        </li>
-                        <li>Event URI:
-                            <a class="text-secondary" href="{{ event.uri }}">{{ event.uri }}</a>
-                        </li>
-                        <li>Event Pooling Type:
-                            {% if event.pooling_type == 'round_robin' %}
-                                Round Robin
-                            {% elseif event.pooling_type == 'collective' %}
-                                Collective
-                            {% else %}
-                                NA
-                            {% endif %}
-                        </li>
-                        <li> Custom Questions: 
-                            <ul>
-                                {% for question in event.custom_questions %}
-                                    <li>
-                                        {{ question.name }} ({% if question.required == "true" %}Required 
-                                                            {% else %}Optional {% endif %}-
-                                        {{ question.type }})
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </li> #}
                     </ul>
+                </div>
+
+                <!-- The Modal -->
+                <div class="modal" id="cancelModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Cancel Event</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <form method="POST" action="{{ path('app_cancel_scheduled_event', {'uuid': uuid}) }}">
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="reason" class="form-label">Cancellation Reason</label>
+                                        <textarea class="form-control" id="reason" name="reason" rows="3" maxlength="10000"></textarea>
+                                    </div>        
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    {# <button type="button" class="btn btn-dark">Cancel Event</button> #}
+                                    {# <a href="{{ path('app_cancel_scheduled_event', {'uuid': uuid}) }}" class="btn-sm btn-danger ms-4" id="btn_events_cancel">Cancel Event</a> #}
+                                    <input type="submit" class="btn btn-dark" name="cancelEvent" id="cancelEvent" value="Confirm Cancellation">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
         </div>
     </div>
 </div>
-
-{% block javascripts %}
-    <script>
-        $(document).ready(function(){
-            console.log($("#sidebarProfile").children(".nav-item").children(".nav-link").addClass("text-secondary"));
-        });
-    </script>
-
-    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-{% endblock %}
 {% endblock %}

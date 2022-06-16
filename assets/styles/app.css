@@ -102,6 +102,10 @@ body {
     background-color: #505a68;
 }
 
+.gen-schedule-link {
+    width: 100px;
+}
+
 /* For Attend Conference */
 /* .calendly-badge-widget .calendly-badge-content {
     display: table-cell;

@@ -8,7 +8,6 @@
         {% include "profile/sidebar.html.twig" %}
     </div>
     <div class="example-wrapper col-md-8">
-        {# <h1 class="mb-4">Hello {{ events.name }}!</h1> #}
         <div class="d-flex justify-content-between">
             <span class="fs-4 text-capitalize text-primary">
                 {{ event_name }} ({{ invitees | length}} Invitees)
@@ -32,15 +31,20 @@
                         <button type="button" class="btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#qnaModal">
                             See QnA
                         </button>
-                        {# <a href="#modal_que_ans" class="btn-sm btn-warning">See QnA</a> #}
                     </div>
-                    {# From index 42 onwards, event uuid will get started #}
-		            {# {% set uuid = event.uri|slice(slicer) %} #}
                     <ul class="m-2 fs-6">
+                        <li>Status:
+                            {% if invitee.status == "active" %}
+                                <span class="text-success">Active</span>
+                            {% elseif invitee.status == "canceled" %}
+                                <span class="text-danger">Cancelled</span>
+                            {% else %}
+                                {{ invitee.status }}
+                            {% endif %}
+                        </li>
                         <li>Invitee Email:
                             <a class="text-secondary" href="mailto: {{ invitee.email }}">{{ invitee.email }}</a>
                         </li>
-                        <li>Event Created At: {{ invitee.created_at|date("d/m/Y") }} ({{ invitee.created_at|ago }}) </li>
                         <li>Rescheduled?:
                             {% if invitee.rescheduled %}
                                 <span class="text-success">Yes</span>
@@ -49,13 +53,10 @@
                             {% endif %}
                         </li>
                         <li>Invitee Timezone: {{ invitee.timezone }}</li>
-                        <li>Cancellation URL:
-                            <a class="text-secondary" href="{{ invitee.cancel_url }}">{{ invitee.cancel_url }}</a>
-                        </li>
-                        <li>Rescheduling URL:
-                            <a class="text-secondary" href="{{ invitee.reschedule_url }}">{{ invitee.reschedule_url }}</a>
-                        </li>
                     </ul>
+                    <div class="mx-4 mb-2">
+                        <a href="{{ path('app_show_scheduled_event_invitees_by_uid', {'uuid': uuid, 'uid': uid}) }}" class="h6">Read More.. </a>
+                    </div>
                 </div>
 
                 <!-- The Modal -->

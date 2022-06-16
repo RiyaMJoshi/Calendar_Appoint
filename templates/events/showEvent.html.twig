@@ -8,7 +8,6 @@
         {% include "profile/sidebar.html.twig" %}
     </div>
     <div class="example-wrapper col-md-8">
-        {# <h1 class="mb-4">Hello {{ events.name }}!</h1> #}
         <div class="d-flex justify-content-between">
             <span class="fs-4 text-capitalize text-primary">
                 {{ event.name }}
@@ -21,7 +20,6 @@
         </div>
         <div id="event">
 		        <div class="card my-4" id="event_records">
-                    {# <span class="h5 m-2 text-dark">{{ event.name }}</span> #}
                     <ul class="m-2 fs-6">
                         <li>Status:
                             {% if event.active == 1 %}
@@ -44,11 +42,6 @@
                                 <ul> 
                                     <li> Name: {{ event.profile.type }} - {{ event.profile.name }} </li>
                                     <li> URI: <a class="text-secondary" href="{{ event.profile.owner }}">{{ event.profile.owner }}</a> </li>
-                                    {# {% for profile in event.profile %}
-                                        <li>
-                                            {{ profile }} 
-                                        </li>
-                                    {% endfor %} #}
                                 </ul>
                             {% else %}
                                 Not Assigned Yet
